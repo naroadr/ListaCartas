@@ -159,7 +159,6 @@ formulario.addEventListener('submit', function(e) {
     actualizarDesplegableSets();
 });
 
-// CORRECCIÓN: Ahora busca la carta exacta por su número y su set bilingüe al darle a editar
 window.prepararEdicion = function(numeroCarta, nombreSet) {
     const carta = misCartasDeseadas.find(c => c.numero === numeroCarta && c.set === nombreSet);
     
@@ -179,7 +178,6 @@ window.prepararEdicion = function(numeroCarta, nombreSet) {
     }
 }
 
-// CORRECCIÓN INTEGRADA: El checkbox ahora también busca de forma infalible
 window.cambiarEstadoCarta = function(numeroCarta, nombreSet) {
     const carta = misCartasDeseadas.find(c => c.numero === numeroCarta && c.set === nombreSet);
     if (carta) {
@@ -189,18 +187,14 @@ window.cambiarEstadoCarta = function(numeroCarta, nombreSet) {
     }
 }
 
-// NUEVA FUNCIÓN: Elimina una carta buscando de forma exacta por número y set
 window.eliminarCarta = function(numeroCarta, nombreSet) {
-    // Pedimos confirmación al usuario para evitar sustos
     if (confirm("¿Seguro que quieres eliminar esta carta de la lista?")) {
         const carta = misCartasDeseadas.find(c => c.numero === numeroCarta && c.set === nombreSet);
         
         if (carta) {
             const indice = misCartasDeseadas.indexOf(carta);
-            // Borramos 1 elemento en esa posición
             misCartasDeseadas.splice(indice, 1);
             
-            // Si justo estábamos editando esa carta, cancelamos la edición
             if (indiceEditando === indice) {
                 indiceEditando = null;
                 formulario.reset();
@@ -210,12 +204,59 @@ window.eliminarCarta = function(numeroCarta, nombreSet) {
             
             guardarEnMemoria();
             cargarWishlist();
-            actualizarDesplegableSets(); // Por si borraste la única carta de un set
+            actualizarDesplegableSets();
         }
     }
 }
 
-// NUEVA FUNCIÓN: Crea el código SQL listo para copiar a Workbench
+// ==========================================
+// NUEVAS FUNCIONES DE EXPORTAR E IMPORTAR
+// ==========================================
+
+// BOTÓN EXPORTAR: Descarga un archivo .txt con tus cartas actuales con un clic
+document.getElementById('btn-exportar').addEventListener('click', function() {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(misCartasDeseadas));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", "mis_cartas_pokemon.txt");
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+});
+
+// BOTÓN IMPORTAR: Te abre el explorador de archivos para cargar tu lista en el navegador nuevo
+document.getElementById('btn-importar').addEventListener('click', function() {
+    const inputOculto = document.createElement('input');
+    inputOculto.type = 'file';
+    inputOculto.accept = '.txt';
+    
+    inputOculto.onchange = e => {
+        const archivo = e.target.files[0];
+        const lector = new FileReader();
+        lector.readAsText(archivo, 'UTF-8');
+        
+        lector.onload = lectorEvent => {
+            try {
+                const contenido = JSON.parse(lectorEvent.target.result);
+                if (Array.isArray(contenido)) {
+                    misCartasDeseadas = contenido;
+                    guardarEnMemoria();
+                    cargarWishlist();
+                    actualizarDesplegableSets();
+                    alert("¡Lista cargada y sincronizada con éxito! 🎉");
+                } else {
+                    alert("El archivo no tiene el formato correcto.");
+                }
+            } catch (error) {
+                alert("Error al leer el archivo.");
+            }
+        }
+    }
+    inputOculto.click();
+});
+
+// ==========================================
+
 function generarComandosSQL() {
     let bloqueSQL = document.getElementById('consola-sql');
     if (!bloqueSQL) {
@@ -262,10 +303,8 @@ function generarHTMLBloque(cartas) {
                                         <input type="checkbox" ${carta.obtenida ? 'checked' : ''} onchange="cambiarEstadoCarta(${carta.numero}, '${carta.set.replace(/'/g, "\\'")}')">
                                         <span>¿La tengo?</span>
                                     </label>
-                                    
                                     <div style="display: flex; gap: 6px; width: 80%; justify-content: center;">
                                         <button onclick="prepararEdicion(${carta.numero}, '${carta.set.replace(/'/g, "\\'")}')" class="btn-editar" style="width: 50%; padding: 4px 6px;">✏️ Editar</button>
-                                        
                                         <button onclick="eliminarCarta(${carta.numero}, '${carta.set.replace(/'/g, "\\'")}')" class="btn-eliminar" style="width: 50%; padding: 4px 6px;">🗑️ Borrar</button>
                                     </div>
                                 </div>
@@ -288,11 +327,11 @@ function cargarWishlist() {
 
     contenedor.innerHTML = `
         <div class="super-contenedor">
-            <h2 class="gran-titulo titulo-pendientes">🎯 Lista de Deseos (Por Conseguir)</h2>
+            <h2 class="gran-titulo titulo-pendientes">Lista de deseos</h2>
             ${generarHTMLBloque(pendientes)}
         </div>
         <div class="super-contenedor" style="margin-top: 60px;">
-            <h2 class="gran-titulo titulo-obtenidas">🎉 ¡Ya las tengo! (Colección)</h2>
+            <h2 class="gran-titulo titulo-obtenidas">Cartas Obtenidas</h2>
             ${generarHTMLBloque(obtenidas)}
         </div>
     `;

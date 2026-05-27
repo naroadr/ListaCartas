@@ -203,3 +203,10 @@ p {
 #form-set-select:focus {
     border-color: #ffcb05;
 }
+#btn-exportar:hover {
+    background-color: #218c74 !important;
+}
+
+#btn-importar:hover {
+    background-color: #8e44ad !important;
+}
