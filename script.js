@@ -147,10 +147,24 @@ formulario.addEventListener('submit', function(e) {
         botonSubmit.textContent = "Agregar a la Lista";
         botonSubmit.style.backgroundColor = "#3b4cca";
     } else {
+        // Modo Creación: ¡Aquí hacemos la comprobación de duplicados!
+        // Compara si ya existe otra carta con mismo nombre, número Y set (sin importar mayúsculas)
+        const cartaDuplicada = misCartasDeseadas.some(carta => 
+            carta.nombre.toLowerCase() === datosCarta.nombre.toLowerCase() &&
+            carta.numero === datosCarta.numero &&
+            carta.set.toLowerCase() === datosCarta.set.toLowerCase()
+        );
+
+        if (cartaDuplicada) {
+            alert(`"Ya está registrada esta carta de "${datosCarta.nombre}" con el número ${datosCarta.numero} en el set "${datosCarta.set}"`);
+            return; // Detiene la función por completo para que no se guarde nada
+        }
+
+        // Si pasa el filtro, se añade con éxito
         datosCarta.obtenida = false;
         misCartasDeseadas.push(datosCarta);
+        alert("¡Se ha añadido la carta con éxito!");
     }
-
     guardarEnMemoria();
     cargarWishlist();
     formulario.reset();
@@ -242,7 +256,7 @@ document.getElementById('btn-importar').addEventListener('click', function() {
                     guardarEnMemoria();
                     cargarWishlist();
                     actualizarDesplegableSets();
-                    alert("¡Lista cargada y sincronizada con éxito! 🎉");
+                    alert("¡Lista cargada y sincronizada con éxito!");
                 } else {
                     alert("El archivo no tiene el formato correcto.");
                 }
@@ -287,8 +301,8 @@ function generarHTMLBloque(cartas) {
                                     </label>
                                     
                                     <div style="display: flex; gap: 6px; width: 80%; justify-content: center;">
-                                        <button onclick="prepararEdicion(${carta.numero}, '${setEscapado}')" class="btn-editar" style="width: 50%; padding: 4px 6px;">✏️ Editar</button>
-                                        <button onclick="eliminarCarta(${carta.numero}, '${setEscapado}')" class="btn-eliminar" style="width: 50%; padding: 4px 6px;">🗑️ Borrar</button>
+                                        <button onclick="prepararEdicion(${carta.numero}, '${setEscapado}')" class="btn-editar" style="width: 50%; padding: 4px 6px;">Editar</button>
+                                        <button onclick="eliminarCarta(${carta.numero}, '${setEscapado}')" class="btn-eliminar" style="width: 50%; padding: 4px 6px;">Borrar</button>
                                     </div>
                                 </div>
                             </div>
