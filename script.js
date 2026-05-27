@@ -77,7 +77,6 @@ let misCartasDeseadas = JSON.parse(localStorage.getItem('misCartasPokemon')) || 
         numero: 225,
         obtenida: false
     }
-    
 ];
 
 let indiceEditando = null;
@@ -90,7 +89,6 @@ const inputSetNuevo = document.getElementById('form-set-nuevo');
 
 function guardarEnMemoria() {
     localStorage.setItem('misCartasPokemon', JSON.stringify(misCartasDeseadas));
-    generarComandosSQL(); // Genera el código para Workbench automáticamente
 }
 
 function actualizarDesplegableSets(setSeleccionado = "") {
@@ -160,7 +158,8 @@ formulario.addEventListener('submit', function(e) {
 });
 
 window.prepararEdicion = function(numeroCarta, nombreSet) {
-    const carta = misCartasDeseadas.find(c => c.numero === numeroCarta && c.set === nombreSet);
+    const numeroReal = Number(numeroCarta);
+    const carta = misCartasDeseadas.find(c => c.numero === numeroReal && c.set === nombreSet);
     
     if (carta) {
         indiceEditando = misCartasDeseadas.indexOf(carta);
@@ -179,17 +178,19 @@ window.prepararEdicion = function(numeroCarta, nombreSet) {
 }
 
 window.cambiarEstadoCarta = function(numeroCarta, nombreSet) {
-    const carta = misCartasDeseadas.find(c => c.numero === numeroCarta && c.set === nombreSet);
+    const numeroReal = Number(numeroCarta);
+    const carta = misCartasDeseadas.find(c => c.numero === numeroReal && c.set === nombreSet);
     if (carta) {
-        carta.obtenida = !carta.obtenida;
-        guardarEnMemoria();
-        cargarWishlist();
+        carta.obtenida = !carta.obtenida; 
+        guardarEnMemoria();               
+        cargarWishlist();                 
     }
 }
 
 window.eliminarCarta = function(numeroCarta, nombreSet) {
     if (confirm("¿Seguro que quieres eliminar esta carta de la lista?")) {
-        const carta = misCartasDeseadas.find(c => c.numero === numeroCarta && c.set === nombreSet);
+        const numeroReal = Number(numeroCarta);
+        const carta = misCartasDeseadas.find(c => c.numero === numeroReal && c.set === nombreSet);
         
         if (carta) {
             const indice = misCartasDeseadas.indexOf(carta);
@@ -213,7 +214,6 @@ window.eliminarCarta = function(numeroCarta, nombreSet) {
 // NUEVAS FUNCIONES DE EXPORTAR E IMPORTAR
 // ==========================================
 
-// BOTÓN EXPORTAR: Descarga un archivo .txt con tus cartas actuales con un clic
 document.getElementById('btn-exportar').addEventListener('click', function() {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(misCartasDeseadas));
     const downloadAnchor = document.createElement('a');
@@ -224,7 +224,6 @@ document.getElementById('btn-exportar').addEventListener('click', function() {
     downloadAnchor.remove();
 });
 
-// BOTÓN IMPORTAR: Te abre el explorador de archivos para cargar tu lista en el navegador nuevo
 document.getElementById('btn-importar').addEventListener('click', function() {
     const inputOculto = document.createElement('input');
     inputOculto.type = 'file';
@@ -257,28 +256,6 @@ document.getElementById('btn-importar').addEventListener('click', function() {
 
 // ==========================================
 
-/*function generarComandosSQL() {
-    let bloqueSQL = document.getElementById('consola-sql');
-    if (!bloqueSQL) {
-        bloqueSQL = document.createElement('pre');
-        bloqueSQL.id = 'consola-sql';
-        bloqueSQL.style = "background:#111; color:#4aff4a; padding:15px; border-radius:10px; max-width:600px; margin:20px auto; font-family:monospace; font-size:0.8rem; overflow-x:auto; border:1px solid #333; text-align:left;";
-        document.body.appendChild(bloqueSQL);
-    }
-
-    let textoSQL = `-- COPIA ESTO EN WORKBENCH PARA ACTUALIZAR:\nUSE pokemon_tracker;\nTRUNCATE TABLE cartas;\n`;
-    
-    misCartasDeseadas.forEach(c => {
-        const nombreEscapado = c.nombre.replace(/'/g, "''");
-        const status = c.obtenida ? 'TRUE' : 'FALSE';
-        
-        textoSQL += `INSERT INTO cartas (nombre, imagen, numero, obtenida, set_id) VALUES ('${nombreEscapado}', '${c.imagen}', ${c.numero}, ${status}, (SELECT id FROM sets WHERE nombre_set = '${c.set}'));\n`;
-    });
-
-    bloqueSQL.textContent = textoSQL;
-}
-*/
-
 function generarHTMLBloque(cartas) {
     if (cartas.length === 0) return `<p style="color: #666; text-align: left; margin-left: 20px;">No hay cartas en esta sección.</p>`;
     const cartasPorSet = {};
@@ -289,11 +266,15 @@ function generarHTMLBloque(cartas) {
 
     let htmlResultado = "";
     for (const nombreSet in cartasPorSet) {
+        const setEscapado = nombreSet.replace(/'/g, "\\'");
+        
         htmlResultado += `
             <div class="seccion-set">
                 <h3 class="titulo-set">${nombreSet}</h3>
                 <div class="grid-cartas">
-                    ${cartasPorSet[nombreSet].map(carta => `
+                    ${cartasPorSet[nombreSet].map(carta => {
+                        const nombreEscapado = carta.nombre.replace(/'/g, "\\'");
+                        return `
                         <div class="carta-contenedor ${carta.obtenida ? 'carta-obtenida' : ''}">
                             <img class="carta-img" src="${carta.imagen}" alt="${carta.nombre}">
                             <div class="carta-info">
@@ -301,17 +282,19 @@ function generarHTMLBloque(cartas) {
                                 <div style="color: #888; font-size: 0.8rem; margin: 4px 0 8px 0;">Nº ${carta.numero}</div>
                                 <div class="controles-carta" style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
                                     <label class="checkbox-contenedor">
-                                        <input type="checkbox" ${carta.obtenida ? 'checked' : ''} onchange="cambiarEstadoCarta(${carta.numero}, '${carta.set.replace(/'/g, "\\'")}')">
+                                        <input type="checkbox" ${carta.obtenida ? 'checked' : ''} onclick="cambiarEstadoCarta(${carta.numero}, '${setEscapado}')">
                                         <span>¿La tengo?</span>
                                     </label>
+                                    
                                     <div style="display: flex; gap: 6px; width: 80%; justify-content: center;">
-                                        <button onclick="prepararEdicion(${carta.numero}, '${carta.set.replace(/'/g, "\\'")}')" class="btn-editar" style="width: 50%; padding: 4px 6px;">✏️ Editar</button>
-                                        <button onclick="eliminarCarta(${carta.numero}, '${carta.set.replace(/'/g, "\\'")}')" class="btn-eliminar" style="width: 50%; padding: 4px 6px;">🗑️ Borrar</button>
+                                        <button onclick="prepararEdicion(${carta.numero}, '${setEscapado}')" class="btn-editar" style="width: 50%; padding: 4px 6px;">✏️ Editar</button>
+                                        <button onclick="eliminarCarta(${carta.numero}, '${setEscapado}')" class="btn-eliminar" style="width: 50%; padding: 4px 6px;">🗑️ Borrar</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    `).join('')}
+                        `;
+                    }).join('')}
                 </div>
             </div>
         `;
@@ -336,8 +319,8 @@ function cargarWishlist() {
             ${generarHTMLBloque(obtenidas)}
         </div>
     `;
-    generarComandosSQL();
 }
 
+// Inicialización limpia de la app al cargar la web
 cargarWishlist();
 actualizarDesplegableSets();
