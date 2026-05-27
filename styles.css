@@ -1,45 +1,81 @@
+/* ==========================================
+   ESTILOS GENERALES DE LA PÁGINA
+   ========================================== */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #1a1a1a;
     color: #fff;
     text-align: center;
     padding: 20px;
+    margin: 0;
 }
 
 h1 {
     color: #ffcb05;
-    text-shadow: 2px 2px #3b4cca;
+    text-shadow: 3px 3px #3b4cca;
     font-size: 2.5rem;
+    margin-bottom: 5px;
 }
 
 p {
     color: #ccc;
     font-size: 1.1rem;
+    margin-bottom: 40px;
 }
 
-/* Rejilla adaptativa para las cartas */
+/* ==========================================
+   ESTILOS DE LAS SECCIONES POR SET
+   ========================================== */
+
+/* Cada set será un bloque completo que ocupa todo el ancho y va hacia abajo */
+.seccion-set {
+    display: block; /* Fuerza a que cada set empiece en una línea nueva abajo */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 50px auto; /* Margen grande abajo para separar un set de otro */
+    padding: 0 20px;
+    box-sizing: border-box;
+    text-align: left; /* Alinea los títulos a la izquierda */
+}
+
+/* El fondo amarillo de los títulos de cada Expansión */
+.titulo-set {
+    color: #3b4cca;
+    background-color: #ffcb05;
+    display: inline-block; /* Hace que el fondo amarillo solo ocupe lo que mide el texto */
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    margin: 0 0 20px 0; /* Espacio solo abajo para separar de sus cartas */
+    box-shadow: 3px 3px 0px #fff;
+    font-weight: bold;
+}
+
+/* Rejilla de cartas exclusiva para cada set */
 .grid-cartas {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 25px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 30px auto 0 auto;
+    width: 100%;
+    clear: both;
 }
 
-/* Contenedor individual de cada carta */
+/* ==========================================
+   ESTILOS DE LAS CARTAS (INDIVIDUALES)
+   ========================================== */
 .carta-contenedor {
     background-color: #2a2a2a;
     border-radius: 15px;
     padding: 12px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center; /* Centra el nombre de la carta debajo de la foto */
 }
 
-/* Efecto al pasar el ratón */
+/* Efecto hover para que floten al pasar el ratón */
 .carta-contenedor:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(255, 203, 5, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 203, 5, 0.4);
 }
 
 .carta-img {
@@ -52,10 +88,118 @@ p {
 .carta-info {
     margin-top: 12px;
     font-size: 0.95rem;
+    color: #fff;
+}
+/* ==========================================
+   ESTILOS PARA EL RASTREADOR DE COLECCIÓN
+   ========================================== */
+
+.super-contenedor {
+    background-color: #222;
+    padding: 20px 10px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
 }
 
-.id-carta {
-    color: #888;
-    font-size: 0.8rem;
-    margin-top: 4px;
+.gran-titulo {
+    font-size: 1.8rem;
+    text-align: left;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.titulo-pendientes {
+    color: #ff4a4a; /* Rojo para lo que falta */
+}
+
+.titulo-obtenidas {
+    color: #4aff4a; /* Verde para lo obtenido */
+}
+
+/* Modificación para las cartas obtenidas (Efecto opcional) */
+.carta-obtenida {
+    border: 2px solid #4aff4a; /* Borde verde brillante */
+    box-shadow: 0 5px 15px rgba(74, 255, 74, 0.2);
+}
+
+.carta-obtenida:hover {
+    box-shadow: 0 8px 25px rgba(74, 255, 74, 0.5) !important;
+}
+/* ==========================================
+   ESTILOS PARA EL FORMULARIO DE ENTRADA
+   ========================================== */
+.formulario-contenedor {
+    background-color: #222;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border: 1px solid #333;
+}
+
+.formulario-contenedor h2 {
+    margin-top: 0;
+    color: #ffcb05;
+    font-size: 1.4rem;
+    text-shadow: 1px 1px #3b4cca;
+}
+
+#formulario-carta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#formulario-carta input {
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#formulario-carta input:focus {
+    border-color: #ffcb05; /* Borde amarillo al hacer clic en el cuadro */
+}
+
+#formulario-carta button {
+    background-color: #3b4cca;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 0px #22319c;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+#formulario-carta button:hover {
+    background-color: #4a5ede;
+}
+
+#formulario-carta button:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+/* Para que el menú desplegable tenga el mismo estilo que los inputs */
+#form-set-select {
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    cursor: pointer;
+}
+
+#form-set-select:focus {
+    border-color: #ffcb05;
 }

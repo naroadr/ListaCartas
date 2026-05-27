@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mi Wishlist de Pokémon TCG</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Wishlist de Pokémon TCG</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-        <h1>Mi Lista de futuras cartas Pokémon</h1>
-        <p>Las cartas que conseguiré en el futuro:</p>
+    <h1>✨ Mi Lista Interactiva de Pokémon ✨</h1>
+    <p>Añade y gestiona tu colección en tiempo real:</p>
 
-        <div class="grid-cartas" id="wishlist"></div>
+    <div class="formulario-contenedor">
+        <h2>➕ Añadir Nueva Carta</h2>
+        <form id="formulario-carta">
+            <input type="text" id="form-nombre" placeholder="Nombre del Pokémon (Ej: Pikachu)" required>
+            <input type="url" id="form-imagen" placeholder="Link de la imagen (.png o .jpg)" required>
+            
+            <select id="form-set-select" required>
+                </select>
+            
+            <input type="text" id="form-set-nuevo" placeholder="Escribe el nombre del nuevo Set" style="display: none;">
+            
+            <input type="number" id="form-numero" placeholder="Número de carta (Ej: 25)" required>
+            <button type="submit" id="btn-submit">Agregar a la Lista</button>
+        </form>
+    </div>
+</div>
 
-        <script src="script.js"></script>
-    </body>
+    <div id="wishlist"></div>
+
+    <script src="script.js"></script>
+</body>
 </html>
