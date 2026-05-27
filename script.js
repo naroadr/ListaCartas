@@ -257,7 +257,7 @@ document.getElementById('btn-importar').addEventListener('click', function() {
 
 // ==========================================
 
-function generarComandosSQL() {
+/*function generarComandosSQL() {
     let bloqueSQL = document.getElementById('consola-sql');
     if (!bloqueSQL) {
         bloqueSQL = document.createElement('pre');
@@ -277,6 +277,7 @@ function generarComandosSQL() {
 
     bloqueSQL.textContent = textoSQL;
 }
+*/
 
 function generarHTMLBloque(cartas) {
     if (cartas.length === 0) return `<p style="color: #666; text-align: left; margin-left: 20px;">No hay cartas en esta sección.</p>`;

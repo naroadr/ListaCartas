@@ -210,3 +210,7 @@ p {
 #btn-importar:hover {
     background-color: #8e44ad !important;
 }
+/* Añade un espacio elegante entre los botones y el inicio de la lista */
+#wishlist {
+    margin-top: 40px; /* Sube o baja este número si quieres más o menos espacio */
+}
