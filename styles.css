@@ -1,9 +1,8 @@
-/* ==========================================
-   ENTRENADOR POKÉMON: ESTILOS GENERALES 
-   ========================================== */
+/* ====================
+   ESTILOS GENERALES 
+   ==================== */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Fondo oscuro con un patrón de rejilla sutil estilo interfaz de Pokédex/Juego */
     background-color: #151515;
     background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
                       linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
@@ -14,14 +13,12 @@ body {
     margin: 0;
 }
 
-/* Título principal de la página estilo Logo Oficial */
 h1 {
     color: #ffcb05;
     font-size: 2.8rem;
     margin-bottom: 5px;
     letter-spacing: 2px;
     font-weight: 900;
-    /* Efecto de borde azul retro como las letras de Pokémon */
     text-shadow: -3px -3px 0 #3b4cca,  
                   3px -3px 0 #3b4cca,
                  -3px  3px 0 #3b4cca,
@@ -36,18 +33,17 @@ p {
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-/* ==========================================
-   FORMULARIO: ESTILO POKÉBOLA REAL PREMIUM
-   ========================================== */
+/* ===================
+   ESTILO POKEBBALL 
+   =================== */
 .formulario-contenedor {
     max-width: 500px;
     margin: 30px auto;
-    border: 5px solid #222222; /* Borde de cómic grueso */
+    border: 5px solid #222222; 
     border-radius: 25px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7), 
                 inset 0 -10px 20px rgba(0,0,0,0.2);
     overflow: hidden;
-    /* División perfecta mitad roja / mitad blanca */
     background: linear-gradient(to bottom, 
         #f34248 0%, #e71d23 42%, #bc1015 49%, 
         #222222 49%, #222222 52%, 
@@ -55,7 +51,6 @@ p {
     position: relative;
 }
 
-/* Reflejo de luz 3D superior */
 .formulario-contenedor::after {
     content: '';
     position: absolute;
@@ -77,7 +72,6 @@ p {
     z-index: 2;
 }
 
-/* El botón central mecánico de apertura */
 .poke-bola-boton {
     width: 42px;
     height: 42px;
@@ -102,7 +96,6 @@ p {
     border-radius: 50%;
 }
 
-/* Animación cuando pasas el ratón por encima de la Pokébola */
 .formulario-contenedor:hover .poke-bola-boton {
     animation: pulsoPokebola 1.5s infinite alternate;
 }
@@ -135,21 +128,18 @@ p {
     gap: 14px;
 }
 
-/* ¡MODIFICADO! Cuadros de texto delgados, elegantes y centrados */
 #formulario-carta input, 
 #form-set-select {
     background-color: #1e1e1e !important;
     border: 2px solid #444444 !important;
     color: #ffffff !important;
-    padding: 8px 12px !important; /* Más delgados verticalmente */
+    padding: 8px 12px !important;
     border-radius: 10px;
     font-size: 0.9rem;
     outline: none;
     box-sizing: border-box;
     transition: all 0.3s ease;
     box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
-
-    /* Ancho controlado y centrado automático */
     width: 85% !important;     
     margin: 0 auto !important; 
 }
@@ -164,7 +154,6 @@ p {
     box-shadow: 0 0 10px rgba(255, 203, 5, 0.5), inset 0 2px 5px rgba(0,0,0,0.5);
 }
 
-/* Botón "Agregar a la Lista" estilizado */
 #btn-submit {
     background: linear-gradient(to bottom, #f34248, #e71d23) !important;
     color: white !important;
@@ -178,8 +167,6 @@ p {
     transition: all 0.2s ease;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
     text-transform: uppercase;
-
-    /* Alineado con el ancho de los inputs */
     width: 85% !important;
     margin: 8px auto 20px auto !important; 
 }
@@ -195,7 +182,6 @@ p {
     box-shadow: 0 2px 0px #961014;
 }
 
-/* Botones guardar y cargar debajo del formulario */
 .btn-poke-secundario {
     background: linear-gradient(to bottom, #ffffff, #e0e0e0) !important;
     color: #222 !important;
@@ -232,9 +218,9 @@ p {
     box-shadow: 0 3px 0px #bc1015;
 }
 
-/* ==========================================
-   ESTILOS DE LOS BLOQUES (SUPER CONTENEDORES)
-   ========================================== */
+/* ========================
+   ESTILOS DE LOS BLOQUES
+   ======================== */
 .super-contenedor {
     background-color: #1c1c1c;
     padding: 25px 15px;
@@ -263,9 +249,9 @@ p {
     text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
 }
 
-/* ==========================================
-   ESTILOS DE LAS SECCIONES POR SET (EXPANSIÓN)
-   ========================================== */
+/* =================================
+   ESTILOS DE LAS SECCIONES POR SET 
+   ================================= */
 .seccion-set {
     display: block;
     width: 100%;
@@ -291,7 +277,6 @@ p {
     text-transform: uppercase;
 }
 
-/* Rejilla de cartas */
 .grid-cartas {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -300,9 +285,9 @@ p {
     clear: both;
 }
 
-/* ==========================================
-   ESTILOS DE LAS CARTAS (COMO CARTAS REALES)
-   ========================================== */
+/* ========================
+   ESTILOS DE LAS CARTAS 
+   ======================== */
 .carta-contenedor {
     background: linear-gradient(145deg, #2e2e2e, #1f1f1f);
     border: 3px solid #3a3a3a;
@@ -322,12 +307,16 @@ p {
 
 .carta-img {
     width: 100%;
-    border-radius: 10px;
-    height: auto;
+    height: auto; 
     display: block;
     box-shadow: 0 4px 8px rgba(0,0,0,0.4);
     background-color: #111;
-    cursor: pointer;
+    border-radius: 10px;
+    cursor: grab;
+}
+
+.carta-img:active {
+    cursor: grabbing;
 }
 
 .carta-info {
@@ -346,7 +335,6 @@ p {
     text-overflow: ellipsis;
 }
 
-/* Checkbox personalizado estilo "Capturado" */
 .checkbox-contenedor {
     display: inline-flex;
     align-items: center;
@@ -358,7 +346,6 @@ p {
     margin-bottom: 5px;
 }
 
-/* Botones de acción rápidos dentro de la carta */
 .btn-editar, .btn-eliminar {
     background-color: #2a2a2a;
     color: #bbb;
@@ -382,9 +369,6 @@ p {
     border-color: #7f8c8d;
 }
 
-/* ==========================================
-   EFECTO CARTA OBTENIDA (¡CAPTURADO!)
-   ========================================= */
 .carta-obtenida {
     border: 3px solid #2ecc71 !important;
     background: linear-gradient(145deg, #1d3324, #142218);
@@ -398,9 +382,9 @@ p {
     margin-top: 40px;
 }
 
-/* ==========================================
-   VENTANA MODAL: AMPLIACIÓN DE CARTA
-   ========================================== */
+/* ========================
+   AMPLIACIÓN DE CARTA
+   ======================== */
 .modal-poke {
     display: none; 
     position: fixed;
@@ -455,4 +439,157 @@ p {
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
     text-transform: uppercase;
+}
+
+/* ========================
+   ESTILOS PARA EL BINDER 
+   ======================== */
+.input-set-nuevo {
+    display: none;
+}
+
+.controles-lista-global {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.btn-lista-gestion {
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.btn-exportar { background-color: #27ae60; }
+.btn-exportar:hover { background-color: #219653; }
+.btn-importar { background-color: #9b59b6; }
+.btn-importar:hover { background-color: #8e44ad; }
+
+.titulo-binder {
+    color: #ffcb05;
+    text-shadow: 2px 2px 0px #3b4cca;
+}
+
+.libro-binder-contenedor {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a1a;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 1250px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+.pagina-binder-3x3 .carta-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 12px !important;
+}
+
+.hueco-binder {
+    aspect-ratio: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.modo-edicion .hueco-binder-vacio {
+    border: 2px dashed #444;
+    background-color: #151515;
+}
+
+.modo-vista .hueco-binder-vacio {
+    border: 1px solid #151515;
+    background-color: #111;
+}
+
+.hueco-binder.drag-over {
+    background: rgba(255, 203, 5, 0.15) !important;
+    border-color: #ffcb05 !important;
+    transform: scale(1.02);
+}
+
+.hueco-numero-guia {
+    color: #3a3a3a;
+    font-weight: bold;
+    font-size: 1.4rem;
+    font-family: sans-serif;
+}
+
+.contenedor-modos-binder {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn-modo-dinamico {
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.btn-modo-activo-vista {
+    background-color: #27ae60;
+    color: white;
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.4);
+}
+
+.btn-modo-activo-edicion {
+    background-color: #e74c3c;
+    color: white;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4);
+}
+
+.btn-modo-inactivo {
+    background-color: #ddd;
+    color: #333;
+}
+
+.paginacion-binder {
+    text-align: center;
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-pag-nav {
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.info-pag-texto {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #fff;
+    font-family: sans-serif;
 }

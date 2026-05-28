@@ -8,8 +8,7 @@
 </head>
 <body>
 
-    <h1> Mi CardList de Pokémon </h1>
-    
+    <h1>Mi CardList de Pokémon</h1>
 
     <div class="formulario-contenedor">
         <h2>Añadir una nueva carta</h2>
@@ -17,27 +16,43 @@
             <input type="text" id="form-nombre" placeholder="Nombre del Pokémon (Ej: Pikachu)" required>
             <input type="url" id="form-imagen" placeholder="Link de la imagen (.png o .jpg)" required>
             
-            <select id="form-set-select" required>
-                </select>
+            <select id="form-set-select" required></select>
             
-            <input type="text" id="form-set-nuevo" placeholder="Escribe el nombre del nuevo Set" style="display: none;">
+            <input type="text" id="form-set-nuevo" placeholder="Escribe el nombre del nuevo Set" class="input-set-nuevo">
             
             <input type="number" id="form-numero" placeholder="Número de carta (Ej: 25)" required>
             <button type="submit" id="btn-submit">Agregar a la Lista</button>
         </form>
     </div>
-    <div style="display: flex; gap: 10px; margin-top: 15px; justify-content: center;">
-        <button type="button" id="btn-exportar" style="background-color: #27ae60; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.85rem; transition: background 0.2s;"> Guardar Lista (Exportar)</button>
-        <button type="button" id="btn-importar" style="background-color: #9b59b6; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.85rem; transition: background 0.2s;"> Cargar Lista (Importar)</button>
+    
+    <div class="controles-lista-global">
+        <button type="button" id="btn-exportar" class="btn-lista-gestion btn-exportar">Guardar Lista (Exportar)</button>
+        <button type="button" id="btn-importar" class="btn-lista-gestion btn-importar">Cargar Lista (Importar)</button>
         <button id="btn-limpiar" class="btn-poke-secundario">Limpiar Lista</button>
     </div>
+
     <div id="wishlist"></div>
 
-    <script src="script.js"></script>
+    <div class="super-contenedor" id="seccion-binder">
+        <h2 class="gran-titulo titulo-binder">Binder de Cartas</h2>
+        
+        <div id="control-modos-dinamico" class="contenedor-modos-binder"></div>
+
+        <div id="grid-binder" class="libro-binder-contenedor"></div>
+
+        <div class="paginacion-binder">
+            <button id="btn-pagina-anterior" class="btn-pag-nav">Páginas Ant.</button>
+            <span id="info-pagina" class="info-pag-texto">1 - 2</span>
+            <button id="btn-pagina-siguiente" class="btn-pag-nav">Páginas Sig.</button>
+        </div>
+    </div>
+
     <div id="modal-carta" class="modal-poke">
-    <span class="modal-cerrar">&times;</span>
-    <img class="modal-contenido" id="img-ampliada">
-    <div id="modal-subtitulo"></div>
-</div>
+        <span class="modal-cerrar">&times;</span>
+        <img class="modal-contenido" id="img-ampliada" alt="Carta ampliada">
+        <div id="modal-subtitulo"></div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
-</html> 
+</html>
