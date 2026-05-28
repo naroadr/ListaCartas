@@ -135,20 +135,23 @@ p {
     gap: 14px;
 }
 
-/* Cuadros de texto oscuros integrados en el fondo blanco */
+/* ¡MODIFICADO! Cuadros de texto delgados, elegantes y centrados */
 #formulario-carta input, 
 #form-set-select {
     background-color: #1e1e1e !important;
     border: 2px solid #444444 !important;
     color: #ffffff !important;
-    padding: 12px 15px;
+    padding: 8px 12px !important; /* Más delgados verticalmente */
     border-radius: 10px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     outline: none;
-    width: 100%;
     box-sizing: border-box;
     transition: all 0.3s ease;
     box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+
+    /* Ancho controlado y centrado automático */
+    width: 85% !important;     
+    margin: 0 auto !important; 
 }
 
 #formulario-carta input::placeholder {
@@ -161,12 +164,12 @@ p {
     box-shadow: 0 0 10px rgba(255, 203, 5, 0.5), inset 0 2px 5px rgba(0,0,0,0.5);
 }
 
-/* Botón "Agregar a la Lista" estilo Nintendo */
+/* Botón "Agregar a la Lista" estilizado */
 #btn-submit {
     background: linear-gradient(to bottom, #f34248, #e71d23) !important;
     color: white !important;
     border: 3px solid #222222 !important;
-    padding: 14px;
+    padding: 12px;
     border-radius: 12px;
     font-size: 1.05rem;
     font-weight: bold;
@@ -175,6 +178,10 @@ p {
     transition: all 0.2s ease;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
     text-transform: uppercase;
+
+    /* Alineado con el ancho de los inputs */
+    width: 85% !important;
+    margin: 8px auto 20px auto !important; 
 }
 
 #btn-submit:hover {
@@ -219,6 +226,12 @@ p {
     box-shadow: 0 3px 0px #6d3284;
 }
 
+#btn-limpiar:hover {
+    background: linear-gradient(to bottom, #ff575c, #ff333a) !important;
+    color: white !important;
+    box-shadow: 0 3px 0px #bc1015;
+}
+
 /* ==========================================
    ESTILOS DE LOS BLOQUES (SUPER CONTENEDORES)
    ========================================== */
@@ -233,7 +246,7 @@ p {
 
 .gran-titulo {
     font-size: 1.9rem;
-    text-align: center; /* ¡MODIFICADO! Centra los títulos grandes "LISTA DE DESEOS" y "CARTAS OBTENIDAS" */
+    text-align: center;
     margin-bottom: 25px;
     font-weight: bold;
     text-transform: uppercase;
@@ -260,20 +273,19 @@ p {
     margin: 0 auto 40px auto;
     padding: 0 15px;
     box-sizing: border-box;
-    text-align: center; /* ¡MODIFICADO! Alinea el contenido y el título del set al centro */
+    text-align: center;
 }
 
-/* El título con un corte angular, ahora en ROJO POKÉMON como pediste */
 .titulo-set {
     color: #ffffff;
-    /* ¡MODIFICADO! Degradado cambiado de Azul a Rojo */
     background: linear-gradient(135deg, #e71d23 0%, #b51217 100%);
     display: inline-block;
-    padding: 10px 25px;
-    border-radius: 6px 20px 6px 20px; /* Esquinas asimétricas */
-    font-size: 1.2rem;
-    margin: 0 auto 20px auto; /* Centrado horizontal */
-    border-left: 5px solid #ffffff; /* Barra lateral amarilla eléctrica */
+    padding: 12px 35px;
+    border-radius: 6px 20px 6px 20px;
+    font-size: 1.45rem;
+    letter-spacing: 1px;
+    margin: 0 auto 25px auto;
+    border-left: 5px solid #ffffff;
     box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
     font-weight: bold;
     text-transform: uppercase;
@@ -282,7 +294,7 @@ p {
 /* Rejilla de cartas */
 .grid-cartas {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 25px;
     width: 100%;
     clear: both;
@@ -293,19 +305,18 @@ p {
    ========================================== */
 .carta-contenedor {
     background: linear-gradient(145deg, #2e2e2e, #1f1f1f);
-    border: 3px solid #3a3a3a; /* Borde interior de carta */
+    border: 3px solid #3a3a3a;
     border-radius: 18px;
-    padding: 14px;
+    padding: 18px;
     box-shadow: 0 6px 12px rgba(0,0,0,0.6);
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
     text-align: center;
     position: relative;
 }
 
-/* Efecto levitación holográfica en Hover */
 .carta-contenedor:hover {
     transform: translateY(-8px) scale(1.03);
-    border-color: #ffcb05; /* Se ilumina en amarillo al apuntarla */
+    border-color: #ffcb05;
     box-shadow: 0 15px 30px rgba(255, 203, 5, 0.25);
 }
 
@@ -315,7 +326,8 @@ p {
     height: auto;
     display: block;
     box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-    background-color: #111; /* Fondo por si tarda en cargar la imagen */
+    background-color: #111;
+    cursor: pointer;
 }
 
 .carta-info {
@@ -326,12 +338,12 @@ p {
 
 .carta-info strong {
     display: block;
-    font-size: 1.05rem;
-    margin-bottom: 4px;
+    font-size: 1.15rem;
+    margin-bottom: 6px;
     color: #f0f0f0;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Corta textos muy largos elegantemente */
+    text-overflow: ellipsis;
 }
 
 /* Checkbox personalizado estilo "Capturado" */
@@ -374,15 +386,73 @@ p {
    EFECTO CARTA OBTENIDA (¡CAPTURADO!)
    ========================================= */
 .carta-obtenida {
-    border: 3px solid #2ecc71 !important; /* Marco verde brillante de éxito */
+    border: 3px solid #2ecc71 !important;
     background: linear-gradient(145deg, #1d3324, #142218);
 }
 
-/* Sombra e iluminación especial verde cuando está obtenida */
 .carta-obtenida:hover {
     box-shadow: 0 15px 30px rgba(46, 204, 113, 0.4) !important;
 }
 
 #wishlist {
     margin-top: 40px;
+}
+
+/* ==========================================
+   VENTANA MODAL: AMPLIACIÓN DE CARTA
+   ========================================== */
+.modal-poke {
+    display: none; 
+    position: fixed;
+    z-index: 9999; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); 
+    backdrop-filter: blur(5px); 
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.modal-contenido {
+    margin: auto;
+    display: block;
+    width: 90%;
+    max-width: 400px; 
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(255, 203, 5, 0.6); 
+    animation: zoomInPoke 0.3s ease-out;
+}
+
+@keyframes zoomInPoke {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-cerrar {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.modal-cerrar:hover {
+    color: #ff575c; 
+    transform: scale(1.1);
+}
+
+#modal-subtitulo {
+    margin: 15px auto;
+    color: #ffcb05;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    text-transform: uppercase;
 }

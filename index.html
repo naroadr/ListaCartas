@@ -29,10 +29,15 @@
     <div style="display: flex; gap: 10px; margin-top: 15px; justify-content: center;">
         <button type="button" id="btn-exportar" style="background-color: #27ae60; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.85rem; transition: background 0.2s;"> Guardar Lista (Exportar)</button>
         <button type="button" id="btn-importar" style="background-color: #9b59b6; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.85rem; transition: background 0.2s;"> Cargar Lista (Importar)</button>
+        <button id="btn-limpiar" class="btn-poke-secundario">Limpiar Lista</button>
     </div>
-   
     <div id="wishlist"></div>
 
     <script src="script.js"></script>
+    <div id="modal-carta" class="modal-poke">
+    <span class="modal-cerrar">&times;</span>
+    <img class="modal-contenido" id="img-ampliada">
+    <div id="modal-subtitulo"></div>
+</div>
 </body>
 </html> 

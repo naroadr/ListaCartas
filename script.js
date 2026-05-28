@@ -1,83 +1,5 @@
-// Tu lista de cartas original con las comas corregidas
-let misCartasDeseadas = JSON.parse(localStorage.getItem('misCartasPokemon')) || [
-    {
-        nombre: "Charizard ex Oscuro",
-        imagen: "https://images.pokemontcg.io/sv3pt5/199.png",
-        set: "Escarlata y Púrpura - 151",
-        numero: 199,
-        obtenida: false
-    },
-    {
-        nombre: "Chespin",
-        imagen: "https://dz3we2x72f7ol.cloudfront.net/expansions/chaos-rising/en-us/SN54_EN_87-2x.png", 
-        set: "Chaos Rising - Caos Creciente",
-        numero: 87,
-        obtenida: false
-    },
-    {
-        nombre: "Froakie",
-        imagen: "https://dz3we2x72f7ol.cloudfront.net/expansions/chaos-rising/en-us/SN54_EN_88-2x.png", 
-        set: "Chaos Rising - Caos Creciente",
-        numero: 88,
-        obtenida: false
-    },
-    {
-        nombre: "Frogadier",
-        imagen: "https://dz3we2x72f7ol.cloudfront.net/expansions/chaos-rising/en-us/SN54_EN_89-2x.png", 
-        set: "Chaos Rising - Caos Creciente",
-        numero: 89,
-        obtenida: false
-    },
-    {
-        nombre: "Xerneas",
-        imagen: "https://dz3we2x72f7ol.cloudfront.net/expansions/chaos-rising/en-us/SN54_EN_91-2x.png", 
-        set: "Chaos Rising - Caos Creciente",
-        numero: 91,
-        obtenida: false
-    },
-    {
-        nombre: "Sliggoo",
-        imagen: "https://dz3we2x72f7ol.cloudfront.net/expansions/chaos-rising/en-us/SN54_EN_95-2x.png", 
-        set: "Chaos Rising - Caos Creciente",
-        numero: 95,
-        obtenida: false
-    },
-    {
-        nombre: "Roxie's Performance",
-        imagen: "http://dz3we2x72f7ol.cloudfront.net/expansions/chaos-rising/en-us/SN54_EN_112-2x.png", 
-        set: "Chaos Rising - Caos Creciente",
-        numero: 112,
-        obtenida: false
-    },
-    {
-        nombre: "Mega Greninja EX",
-        imagen: "https://dz3we2x72f7ol.cloudfront.net/expansions/chaos-rising/en-us/SN54_EN_116-2x.png", 
-        set: "Chaos Rising - Caos Creciente",
-        numero: 116,
-        obtenida: false
-    },
-    {
-        nombre: "AZ's Tranquility",
-        imagen: "https://dz3we2x72f7ol.cloudfront.net/expansions/chaos-rising/en-us/SN54_EN_120-2x.png", 
-        set: "Chaos Rising - Caos Creciente",
-        numero: 120,
-        obtenida: false
-    },
-    {
-        nombre: "Salazzle",
-        imagen: "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/en-us/M7XJ_EN_224-2x.png", 
-        set: "Ascended Heroes - Héroes Ascendentes",
-        numero: 224,
-        obtenida: false
-    },
-    {
-        nombre: "Scorbunny",
-        imagen: "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/en-us/M7XJ_EN_225-2x.png", 
-        set: "Ascended Heroes - Héroes Ascendentes",
-        numero: 225,
-        obtenida: false
-    }
-];
+// Tu lista de cartas que se inicializa vacía para nuevos usuarios
+let misCartasDeseadas = JSON.parse(localStorage.getItem('misCartasPokemon')) || [];
 
 let indiceEditando = null;
 
@@ -147,8 +69,7 @@ formulario.addEventListener('submit', function(e) {
         botonSubmit.textContent = "Agregar a la Lista";
         botonSubmit.style.backgroundColor = "#3b4cca";
     } else {
-        // Modo Creación: ¡Aquí hacemos la comprobación de duplicados!
-        // Compara si ya existe otra carta con mismo nombre, número Y set (sin importar mayúsculas)
+        // Modo Creación: Comprobación de duplicados
         const cartaDuplicada = misCartasDeseadas.some(carta => 
             carta.nombre.toLowerCase() === datosCarta.nombre.toLowerCase() &&
             carta.numero === datosCarta.numero &&
@@ -157,10 +78,9 @@ formulario.addEventListener('submit', function(e) {
 
         if (cartaDuplicada) {
             alert(`"Ya está registrada esta carta de "${datosCarta.nombre}" con el número ${datosCarta.numero} en el set "${datosCarta.set}"`);
-            return; // Detiene la función por completo para que no se guarde nada
+            return;
         }
 
-        // Si pasa el filtro, se añade con éxito
         datosCarta.obtenida = false;
         misCartasDeseadas.push(datosCarta);
         alert("¡Se ha añadido la carta con éxito!");
@@ -196,8 +116,8 @@ window.cambiarEstadoCarta = function(numeroCarta, nombreSet) {
     const carta = misCartasDeseadas.find(c => c.numero === numeroReal && c.set === nombreSet);
     if (carta) {
         carta.obtenida = !carta.obtenida; 
-        guardarEnMemoria();               
-        cargarWishlist();                 
+        guardarEnMemoria();              
+        cargarWishlist();                
     }
 }
 
@@ -225,7 +145,7 @@ window.eliminarCarta = function(numeroCarta, nombreSet) {
 }
 
 // ==========================================
-// NUEVAS FUNCIONES DE EXPORTAR E IMPORTAR
+// FUNCIONES DE EXPORTAR E IMPORTAR
 // ==========================================
 
 document.getElementById('btn-exportar').addEventListener('click', function() {
@@ -269,6 +189,8 @@ document.getElementById('btn-importar').addEventListener('click', function() {
 });
 
 // ==========================================
+// FUNCIÓN PARA GENERAR EL HTML
+// ==========================================
 
 function generarHTMLBloque(cartas) {
     if (cartas.length === 0) return `<p style="color: #666; text-align: left; margin-left: 20px;">No hay cartas en esta sección.</p>`;
@@ -288,9 +210,10 @@ function generarHTMLBloque(cartas) {
                 <div class="grid-cartas">
                     ${cartasPorSet[nombreSet].map(carta => {
                         const nombreEscapado = carta.nombre.replace(/'/g, "\\'");
+                        const imagenEscapada = carta.imagen.replace(/'/g, "\\'");
                         return `
                         <div class="carta-contenedor ${carta.obtenida ? 'carta-obtenida' : ''}">
-                            <img class="carta-img" src="${carta.imagen}" alt="${carta.nombre}">
+                            <img class="carta-img" src="${carta.imagen}" alt="${carta.nombre}" onclick="ampliarCarta('${imagenEscapada}', '${nombreEscapado}')">
                             <div class="carta-info">
                                 <strong>${carta.nombre}</strong>
                                 <div style="color: #888; font-size: 0.8rem; margin: 4px 0 8px 0;">Nº ${carta.numero}</div>
@@ -334,6 +257,54 @@ function cargarWishlist() {
         </div>
     `;
 }
+
+// ==========================================
+// FUNCIÓN PARA LIMPIAR LA PANTALLA
+// ==========================================
+document.getElementById('btn-limpiar').addEventListener('click', function() {
+    if (confirm("¿Quieres vaciar la lista actual para cargar otra colección? (Esto no borrará tus archivos .txt guardados en tu PC)")) {
+        misCartasDeseadas = []; 
+        guardarEnMemoria();        
+        cargarWishlist();          
+        actualizarDesplegableSets(); 
+        alert("¡Lista despejada! Ya puedes importar un nuevo archivo .txt o empezar tu colección desde cero.");
+    }
+});
+
+// ==========================================
+// LÓGICA DE LA VENTANA MODAL (ZOOM CARTA)
+// ==========================================
+window.ampliarCarta = function(srcImagen, nombreCarta) {
+    const modal = document.getElementById('modal-carta');
+    const imgAmpliada = document.getElementById('img-ampliada');
+    const subtitulo = document.getElementById('modal-subtitulo');
+
+    if (modal && imgAmpliada && subtitulo) {
+        modal.style.display = "flex"; 
+        imgAmpliada.src = srcImagen;  
+        subtitulo.innerText = nombreCarta; 
+    }
+}
+
+// Eventos para cerrar la ventana del modal
+document.addEventListener('DOMContentLoaded', () => {
+    const botonCerrar = document.querySelector('.modal-cerrar');
+    const modalContenedor = document.getElementById('modal-carta');
+
+    if (botonCerrar) {
+        botonCerrar.addEventListener('click', () => {
+            modalContenedor.style.display = "none";
+        });
+    }
+
+    if (modalContenedor) {
+        modalContenedor.addEventListener('click', (e) => {
+            if (e.target.id === 'modal-carta') {
+                modalContenedor.style.display = "none";
+            }
+        });
+    }
+});
 
 // Inicialización limpia de la app al cargar la web
 cargarWishlist();
