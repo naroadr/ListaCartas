@@ -212,7 +212,7 @@ if (btnImportar) {
                         guardarEnMemoria();
                         cargarWishlist();
                         actualizarDesplegableSets();
-                        alert("¡Lista antigua cargada! El Binder se ha mantenido intacto.");
+                        alert("¡Lista cargada! El Binder se ha mantenido intacto.");
                     } else {
                         alert("El archivo no tiene el formato correcto.");
                     }
@@ -284,7 +284,7 @@ function cargarWishlist() {
 
     contenedor.innerHTML = `
         <div class="super-contenedor" id="zona-drop-eliminar">
-            <h2 class="gran-titulo titulo-pendientes">Lista de deseos (Arrastra aquí desde el álbum para quitar)</h2>
+            <h2 class="gran-titulo titulo-pendientes">Lista de deseos</h2>
             ${generarHTMLBloque(pendientes)}
         </div>
         <div class="super-contenedor" style="margin-top: 50px;">
