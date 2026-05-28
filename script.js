@@ -32,7 +32,7 @@ function actualizarDesplegableSets(setSeleccionado = "") {
         opcionesHTML += `<option value="${setName}" ${setSeleccionado === setName ? 'selected' : ''}>${setName}</option>`;
     });
     
-    opcionesHTML += `<option value="NUEVO_SET" ${setSeleccionado === "NUEVO_SET" ? 'selected' : ''}>➕ Crear nuevo set...</option>`;
+    opcionesHTML += `<option value="NUEVO_SET" ${setSeleccionado === "NUEVO_SET" ? 'selected' : ''}>➕ Añadir nuevo set</option>`;
     selectSet.innerHTML = opcionesHTML;
     
     if (inputSetNuevo) {
@@ -231,8 +231,9 @@ function generarHTMLBloque(cartas) {
         cartasPorSet[carta.set].push(carta);
     });
 
+    const setsOrdenados = Object.keys(cartasPorSet).sort((a, b) => a.localeCompare(b));
     let htmlResultado = "";
-    for (const nombreSet in cartasPorSet) {
+    setsOrdenados.forEach(nombreSet => {
         const setEscapado = nombreSet.replace(/'/g, "\\'");
         
         htmlResultado += `
@@ -266,7 +267,7 @@ function generarHTMLBloque(cartas) {
                 </div>
             </div>
         `;
-    }
+    });
     return htmlResultado;
 }
 
